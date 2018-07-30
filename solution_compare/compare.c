@@ -325,7 +325,31 @@ void CplexInit(void) {
     /******************************************************************/
 }
 
-double FindDistance(vector<Point> a, vector<Point> b, bool relDist, double & minMagnitude) {
+double GetMinMagnitude(vector<Point> a, vector<Point> b)
+{
+    double retVal = CPX_INFBOUND;
+    double curVal = 0.;
+    
+    for(unsigned int i = 0; i < a.size(); i++)
+    {
+        curVal = 0.;
+        for(unsigned int j = 0; j < a[0].point.size(); j++) curVal += a[i].point[j]*a[i].point[j];
+        curVal = sqrt(curVal);
+        if(curVal < retVal) retVal = curVal;
+    }
+    
+    for(unsigned int i = 0; i < b.size(); i++)
+    {
+        curVal = 0.;
+        for(unsigned int j = 0; j < b[0].point.size(); j++) curVal += b[i].point[j]*b[i].point[j];
+        curVal = sqrt(curVal);
+        if(curVal < retVal) retVal = curVal;
+    }
+    
+    return retVal;
+}
+
+double FindDistance(vector<Point> a, vector<Point> b) {
     vector<double> lb;
     int ind = 0;
     int num = 0;
@@ -340,6 +364,7 @@ double FindDistance(vector<Point> a, vector<Point> b, bool relDist, double & min
 
     size_t points = a.size();
     size_t dim = a[0].point.size();
+    
 
     // need to find the diff between points in a and points in b.
     // store this in diff
@@ -376,7 +401,10 @@ double FindDistance(vector<Point> a, vector<Point> b, bool relDist, double & min
     {
         for(unsigned int j = 0; j < dim + 1; j++)
         {
-            if(j != dim) status = CPXchgcoef (env, lp, j, i, a[i].point[j]);
+            if(j != dim)
+            {
+                 status = CPXchgcoef (env, lp, j, i, a[i].point[j]);
+            }
             else status = CPXchgcoef (env, lp, j, i, 1.);
         }
     }
@@ -421,16 +449,7 @@ double FindDistance(vector<Point> a, vector<Point> b, bool relDist, double & min
     cmatval.resize(dim);
 
     for(unsigned int i = 0; i < diff.size(); i++)
-    {
-        
-        if(relDist)
-        {
-            va = 0.;
-            for(unsigned int j = 0; j < diff[i].point.size(); j++) va += diff[i].point[j]*diff[i].point[j];
-            va = sqrt(va);
-            if(va < minMagnitude) minMagnitude = va;
-        }
-    
+    {    
         lp1 = CPXcloneprob (env, lp, &status);
 /*        cout << "i: " << i << endl;*/
 /*        for(unsigned int j = 0; j < dim; j++)*/
@@ -571,32 +590,39 @@ int main(int argc, char **argv)
 
     if (not same and findDistances) {
         CplexInit();
-	// nate, check this to see if I have the verbage right.
-	// I had changed everything before I realized what the output said.
-	if (not TERSE) {
+	    // nate, check this to see if I have the verbage right.
+	    // I had changed everything before I realized what the output said.
+	    if (not TERSE) {
         cout << "Determining distance from each point to " 
              << "the polyhedron specified by the extreme points in the other file"  << endl
 	     << " (extreme directions included)." << endl;;
         }
         // Create Problem 1 
-        min =  FindDistance(set1, set2, relDist, minMagnitude);
-	if (not TERSE) {
-            cout << "\tFrom " << argv[1] << " to " << argv[2] << " : "
-                 << abs(min) << endl;
-            if(relDist) cout << "\t\tAs a relative distance: " << abs(min)/minMagnitude << endl;
-	} else {
-	    cout << abs(min) << ",";
-	}
+        
+        if(relDist) 
+        {
+            minMagnitude = GetMinMagnitude(set1,set2);
+/*            cout << "The minimmum magnitude is: " << minMagnitude << endl << endl;*/
+        }
+            
+        min =  FindDistance(set1, set2);
+	    if (not TERSE) {
+                cout << "\tFrom " << argv[1] << " to " << argv[2] << " : "
+                     << abs(min) << endl;
+                if(relDist) cout << "\t\tAs a relative distance: " << abs(min)/minMagnitude << endl;
+	    } else {
+	        cout << abs(min) << ",";
+	    }
 
-        //  Create Problem 2 *******************
-        min = FindDistance(set2, set1, false, minMagnitude);
-	if (not TERSE) {
-           cout << "\tFrom " << argv[2] << " to " << argv[1] << " : "
-                 << abs(min) << endl;
-           if(relDist) cout << "\t\tAs a relative distance: " << abs(min)/minMagnitude << endl;
+            //  Create Problem 2 *******************
+        min = FindDistance(set2, set1);
+	    if (not TERSE) {
+               cout << "\tFrom " << argv[2] << " to " << argv[1] << " : "
+                     << abs(min) << endl;
+               if(relDist) cout << "\t\tAs a relative distance: " << abs(min)/minMagnitude << endl;
         } else {
-	    cout << abs(min) << endl;
-	}
+	        cout << abs(min) << endl;
+	    }
     }
 
     cout << endl;
