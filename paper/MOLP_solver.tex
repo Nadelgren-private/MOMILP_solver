@@ -1,0 +1,538 @@
+\documentclass[12pt]{article}
+%\documentclass[smallextended]{svjour3}                     % onecolumn (standard format)
+%\documentclass[smallcondensed]{svjour3}     % onecolumn (ditto)
+%\documentclass[smallextended,natbib]{svjour3}       % onecolumn (second format)
+%\documentclass[twocolumn]{svjour3}          % twocolumn
+%
+%\smartqed
+\usepackage{amsmath,amssymb,amsfonts,amsthm} 
+\usepackage[top=.75in,bottom=.75in,right=.75in,left=.75in]{geometry}
+%\geometry{a4paper}
+%\usepackage[authoryear,sort]{natbib}
+\usepackage[numbers,sort&compress]{natbib}
+
+%\usepackage{authblk}
+%\usepackage{fullpage}
+%\usepackage{listings}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{booktabs} 
+\usepackage{multirow}
+\usepackage{epstopdf}
+\usepackage{pdfpages}
+\usepackage{cancel}
+\usepackage{hyperref}
+\usepackage[noend]{algpseudocode}
+\usepackage{algorithm}
+\usepackage{algorithmicx}
+\usepackage{array}
+%\usepackage{relsize}
+%\usepackage[numbers,sort&compress,sectionbib]{natbib}
+%\usepackage{amsaddr}
+\usepackage{subcaption}
+%\usepackage[center]{caption}
+\usepackage{wrapfig}
+\usepackage{tikz}
+\usepackage{tkz-graph}
+\usepackage{tikz-3dplot}
+\usetikzlibrary{arrows,positioning,automata}
+\usepackage{mathrsfs}
+\usepackage{ wasysym }
+\usepackage{multicol}
+\usepackage{longtable}
+\usepackage{lscape}
+\usepackage[normalem]{ulem}
+\usepackage{color}
+\usepackage{url}
+\usepackage{sectsty}
+%\usepackage[affil-it]{authblk}
+%\usepackage{titlesec}
+
+%\setlength{\captionmargin}{1pt}
+
+\DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
+
+\newtheorem{prop}{Proposition}
+\newtheorem{obs}{Observation}
+\newtheorem{lemma}{Lemma}
+\newtheorem{thm}{Theorem}
+
+%\DeclareMathOperator{\maxde}{max\_ depth}
+%\DeclareMathOperator{\minde}{min\_ depth}
+%\DeclareMathOperator{\childtype}{child\_ type}
+%\DeclareMathOperator{\subts}{subtree\_ size}
+%\DeclareMathOperator{\idptl}{ideal\_ point\_ left}
+%\DeclareMathOperator{\idptr}{ideal\_ point\_ right}
+%%\DeclareMathOperator{\bcup}{\biggcup}
+%\DeclareMathOperator{\proj}{Proj}
+
+\newcommand{\bb}{BB}
+\newcommand*\anotherif[2]{\State \textbf{if} #1 \textbf{then} #2}
+\newcommand*\spacedif[3]{\State \hspace*{#1} \textbf{if} #2 \textbf{then} #3}
+\newcommand*\anotherelse[1]{\State \textbf{else} #1}
+\newcommand*\spacedelse[2]{\State \hspace*{#1} \textbf{else} #2}
+\newcommand{\li}[2][1]{\ensuremath{\displaystyle{\lim_{#1 \rightarrow #2}}}}
+\newcommand{\su}[2][1]{\ensuremath{\displaystyle{\sum_{#1}^{#2}}}}
+%\renewcommand{\arraystretch}{1.1}
+\newcommand*\Let[2]{\State #1 $\gets$ #2}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\T}{\mathbb{T}}
+\renewcommand{\O}{\mathbb{O}}
+\newcommand{\rgn}{\textsf{Rgn}}
+\newcommand{\pnt}{\textsf{Pnt}}
+\newcommand{\sgmt}{\textsf{Sgmt}}
+\newcommand{\rt}{\textsf{Root}}
+\newcommand{\lft}{\textsf{Left}}
+\newcommand{\rght}{\textsf{Right}}
+\newcommand{\maxd}{\maxde}
+\newcommand{\mind}{\minde}
+\newcommand{\ipl}{\idptl}
+\newcommand{\ipr}{\idptr}
+\newcommand{\ct}{\childtype}
+%\newcommand{\biggcup}{\mathlarger{\mathlarger{\mathlarger{\cup}}}}
+\newcommand{\lcup}{\cup} %{\mathlarger{\mathlarger{\cup}}}
+\newcommand{\xbar}{\overline{x}}
+\newcommand{\ybar}{\overline{y}}
+\newcommand{\xp}{x^{\prime}}
+\newcommand{\yp}{y^{\prime}}
+\newcommand{\sts}{\subts}
+\newcommand{\dom}{\succ}
+\newcommand{\pdom}{\succ_p}
+\renewcommand{\P}{\mathbb{P}}
+\renewcommand{\xi}{f}
+\newcommand{\U}{\mathcal{U}}
+\renewcommand{\L}{\mathcal{L}}
+\renewcommand{\S}{\mathcal{S}}
+\newcommand{\N}{\mathcal{N}}
+\newcommand{\OS}{\mathcal{OS}}
+\renewcommand{\top}{}
+\newcommand{\penta}{\scalebox{1.3}{\pentagon}}
+\newcommand{\hexa}{\scalebox{1.3}{\hexagon}}
+\newcommand{\bul}{\scalebox{.45}{\ensuremath{\bullet}}}
+\newcommand*{\tran}{^{\mkern-1.5mu\mathsf{T}}}
+\renewcommand{\top}{\tran}
+\newcommand{\argmin}{\text{argmin}}
+\newcommand\Tstrut{\rule{0pt}{3ex}} 
+\newcommand\Tstrutt{\rule{0pt}{5ex}} 
+\newcommand\Tstruttt{\rule{0pt}{12ex}}
+\newcommand{\argmax}{\text{argmax}}
+%\newcommand{\argmin}{\text{argmin}}
+
+%\renewcommand{\ell}{l}
+\newcommand{\objf}{\boldsymbol{f}}
+\newcommand{\nonneg}{\R^{p}_{\ge 0}}
+\newcommand{\nonpos}{\R^{2}_{\le 0}}
+\newcommand{\nd}[1]{\mathcal{ND}(#1)}
+\newcommand{\comment}[1]{{\color{red} #1}}
+\newcommand{\aff}{\text{aff}}
+
+
+
+%\addbibresource{~/Dropbox/bibtex_files/4th_exam_citations.bib}
+%\addbibresource{~/Dropbox/bibtex_files/multiobjective.bib}
+%\addbibresource{MIP.bib}
+%\addbibresource{misc.bib}
+
+\newcommand{\keywords}[1]{\textbf{\fontsize{10}{12}\selectfont KEYWORDS\\} #1}
+\newcommand{\subclass}[1]{\textbf{MSC 2010.} #1}
+
+\setlength{\columnsep}{.5in}
+
+\pagenumbering{gobble}
+\captionsetup{labelfont={bf}}
+
+\renewcommand{\abstractname}{\fontsize{10}{12}\selectfont ABSTRACT\vspace*{-3.1mm}}
+
+\renewcommand{\thesection}{\fontsize{12}{14.4}\selectfont \arabic{section}.}
+\sectionfont{\fontsize{12}{14.4}\selectfont}
+
+\makeatletter
+\renewcommand{\@biblabel}[1]{[#1]\hfill}
+\makeatother
+
+\setlength\bibindent{-2em}
+
+\makeatletter
+\renewcommand\NAT@bibsetnum[1]{\settowidth\labelwidth{\@biblabel{#1}}%
+   \setlength{\leftmargin}{\bibindent}\addtolength{\leftmargin}{\dimexpr\labelwidth+\labelsep\relax}%
+   \setlength{\itemindent}{-\bibindent}%
+   \setlength{\listparindent}{\itemindent}
+\setlength{\itemsep}{\bibsep}\setlength{\parsep}{\z@}%
+   \ifNAT@openbib
+     \addtolength{\leftmargin}{\bibindent}%
+     \setlength{\itemindent}{-\bibindent}%
+     \setlength{\listparindent}{\itemindent}%
+     \setlength{\parsep}{0pt}%
+   \fi
+}
+\makeatother
+%
+
+%\titlespacing{\section}{0pt}{*4}{*1}
+
+\begin{document}
+
+\title{GeDi: Solving multiobjective linear programs via the generalized dichotomic search.}
+\author{Nathan Adelgren\\Department of Mathematics and Computer Science\\Edinboro University\\Edinboro, PA 16444\\nadelgren@edinboro.edu \and Daniel Bennett\\Department of Mathematics and Computer Science\\Edinboro University\\Edinboro, PA 16444\\dbennett@edinboro.edu}
+\date{}
+
+
+%\twocolumn[{%
+ \maketitle
+%}]
+%\maketitle
+%\twocolumn
+
+\begin{abstract}
+We present GeDi, a new software package which computes all Pareto solutions for a multiobjective linear program by utilizing a version of the dichotomic search \citep{cohon1978multiobjective,aneja1979bicriteria} which has been generalized for any finite number of objectives. GeDi is employed to solve a substantial set of problems, including those available through MOPLIB \citep{moplib}. The performance of GeDi is compared against that of BenSolve \citep{bensolve,lohne2017vector}, which is based on Benson's algorithm and its extensions \citep{benson1998outer,benson1998b,benson1998hybrid}, Inner \citep{inner,csirmaz2016using}, and PolySCIP \citep{Borndoerfer2016,polyscip} using a variety of metrics. Results indicate that GeDi is competitive with current state of the art software.\\~\\
+\keywords{ Multiobjective, Pareto, Objective-space, Dichotomic search}
+%\subclass{90C11 \and 90C57 \and 90C29 \and 90-04 \and 90-08}
+\end{abstract}
+%
+
+\section{Introduction}\label{intro}
+
+
+This paper introduces GeDi, a new software package designed to generate the entire Pareto set of a multiobjective linear program (MOLP), which is formulated as
+\begin{equation}\label{MOLP}
+\min_{x} \left\{\begin{array}{c} f_1(x) := {c^{1}}^{\top}x \\ 
+\vdots\\
+f_p(x) := {c^{p}}^{\top}x \end{array}\right\} \quad \text{s.t.} \quad  x \in X
+\end{equation}
+where $X := \left\{x\in \R^{n} \colon Ax\leq b,\; l_i \leq x_i \leq u_i \ \forall i\right\}$.
+Note that for the above model we permit $l_i = -\infty$ or $u_i = \infty$ for any $i$, but we do make the assumption that the objectives $f_1, \dots, f_p$ are conflicting, i.e., for distinct $i,j \in \{1,\dots,p\}$ there does not exist $x \in X$ that minimizes both $f_i$ and $f_j$ simultaneously.
+
+Multiobjective optimization problems have been studied for decades; see \citep{ehrgott2005multicriteria,ehrgott2005multiobjective} for relevant surveys. The earliest algorithms developed for solving MOLP were so-called variable space (or constraint space) search algorithms which sought to compute all solutions by working in the space $X$ directly \citep{armand1993finding,armand1991determination,ecker1980generating,ecker1978finding,
+evans1973revised,isermann1977enumeration,zionts1980identifying}. Later, many researchers determined that a representative subset of the solutions to MOLP could be obtained by working in the space 
+\begin{equation}\label{Y}
+Y := \left\{ y\in \R^p: y = \left(f_1(x), \dots, f_p(x)\right), x \in X \right\},
+\end{equation} 
+often with far less computational effort. Thus, so-called objective space (or criterion space) search algorithms were born \citep{dauer1990solving,benson1998outer,dauer1987analysis,lohne2011vector,csirmaz2016using,
+ehrgott2012dual,hamel2014benson}. An alternative approach to solving MOLP is to apply to MOLP a well known scalarization technique known as the weighted-sum method (described in more detail later) and then work in the so-called weight space to compute the same representative subset of solutions that can be achieved via an objective space search \citep{benson2000outcome,Borndoerfer2016,rudloff2017parametric}. The algorithms we present in this work and which are employed by GeDi utilize an objective space search strategy. 
+
+
+
+\section{Definitions and Notation}\label{sec:prelim}
+The idea of optimality for single objective optimization is replaced with the idea of \emph{efficiency} in multiobjective problems. Consider MOLP \eqref{MOLP}. For each $x \in X$, define $y(x) \in Y$ so that $y(x) := (f_{1}(x), \dots, f_{p}(x))$. Given distinct $x,x^{\prime} \in X$, we say that $y(x)$ \emph{dominates} $y(x^{\prime})$ if $y(x) \leq y(x^{\prime})$, or equivalently, if $y(x^{\prime})$ is contained in the set $y(x) + \nonneg$. We denote this relationship as $y \dom y^{\prime}$. We then say that $x\in X$ is \emph{efficient} if there is no $x' \in X$ such that $y(x') \dom y(x)$. The set of efficient solutions is denoted by $X_E$. Additionally, $y(x) \in Y$ is called \emph{Pareto optimal} or \emph{nondominated} if $x \in X_{E}$. 
+
+As mentioned in Section \ref{intro}, there are many strategies that are employed when solving MOLP \eqref{MOLP}. However, these strategies can all be categorized into one of two groups based on whether they seek to compute: (i) each $x \in X_E$ or, (ii) a set $X' \subseteq X_E$ such that for each $y \in Y_N$, there exists at least one $x \in X'$ such that $y = y(x)$. The procedures proposed in this paper are of the latter type. 
+
+\section{The Generalized Dichotomic Search}\label{GeDi}
+
+In this section we discuss the primary algorithm employed by GeDi, a generalization of the dichotomic search proposed by \citet{aneja1979bicriteria} for solving MOLP when $p=2$. Our proposed generalization is designed to solve MOLP for any finite $p$, and henceforth we refer to it as the generalized dichotomic search (GDS).
+
+GDS is an iterative process which maintains and updates a set $\S$ of $(p-1)$-dimensional simplices such that at every iteration, $\S + \nonneg \subseteq Y_N + \nonneg$ and at termination, $\S + \nonneg = Y_N + \nonneg$. Given a $(p-1)$-dimensional simplex $s \in \S$, let $y^1_s, \dots, y^p_s$ denote its $p$ extreme points and let $n_s$ denote the normal vector of the $(p-1)$-dimensional hyperplane $\aff(s)$, where $\aff(\cdot)$ denotes the affine hull. 
+
+{\color{red} I left off here. }
+
+GDS relies heavily on the well known \emph{weighted sum problem} (WSP), which utilizes a weight vector $\lambda \in \R^p$ to scalarize MOLP. WSP is formulated as
+
+\begin{equation}\label{WSP}
+WSP(\lambda) := \min_{x} \left\{\begin{array}{c} \su[i=1]{p} \lambda_i f_i(x) \end{array}\right\} \quad \text{s.t.} \quad  x \in X.
+\end{equation}
+
+
+
+Throughout this work we exploit the properties of \emph{slice problems} -- continuous multiobjective programs obtained by fixing the integer variables to some feasible values. Let us decompose each $x \in X_I$ as $(x^\Z,x^\R)$, where $x^\Z$ and $x^\R$ denote the integer and continuous subvectors of $x$, respectively. The slice problem for a given $x^* \in X_I$ is \[\P(x^*) := \max\left\{\objf(x): x^\Z = (x^{*})^\Z,\, x \in X_I \right\}\]
+and we use $\mathcal{P}(x^*)$ to denote the set of Pareto optimal solutions to $\P(x^*)$. We have $Y_N = \nd{\cup_{x\in X_I} \mathcal{P}(x)}$. Hence, in this work we seek to find $Y_N$ by constructing $\nd{\cup_{x\in X_I} \mathcal{P}(x)}$.
+
+The idea behind the slice problem exploitation method (SPEM) is, in general, the same as all other objective (or criterion) space search algorithms -- to iteratively break $\OS$ into subregions and solve single objective MILPs which are carefully formulated so as to ensure that all Pareto solutions within each subregion are computed. In this work, each subregion we consider is rectangular, and we refer to them as \emph{boxes}. We identify a box $b \subset \R^2$ using its northwest and southeast corners (singletons) which we denote $b^{nw} = (b^{nw}_1,b^{nw}_2)$ and $b^{se}= (b^{se}_1,b^{se}_2)$, respectively. We will also use the notation $b = (b^{nw},b^{se})$.
+
+SPEM depends on two underlying tools: (i) a dynamic data structure $\mathscr{D}$ capable of taking subsets of $Y_I$ as input and storing only the nondominated subset of all input, and (ii) a procedure for computing $\mathcal{P}(x)$ for a given $x \in X_I$. For the former, we utilize the data structure of \citet{adelgren2014}. The latter can be accomplished using the the dichotomic search \citep{cohon1978multiobjective,aneja1979bicriteria} or parametric simplex \citep{zeleny1974linear,ehrgott2005multicriteria} algorithms, though we utilize a different procedure which is described later in this section (Algorithm \ref{alg3}). For a given $x \in X_I$, $\mathcal{P}(x)$ is a subset of $\R^2$ consisting of either a singleton or a piecewise-linear, monotonically decreasing curve. Hence, $Y_N$ is formed as a union of singletons and line segments with negative slopes in $\R^2$. Consequently, the data structure $\mathscr{D}$ is designed specifically to store either singletons or line segments with negative slopes. We will use $z \in \mathscr{D}$ to indicate a singleton or segment that is stored in $\mathscr{D}$. Furthermore, each $z \in \mathscr{D}$ is identified by its northwest and southeast extreme points, which we denote $z^{nw} = (z^{nw}_1,z^{nw}_2)$ and $z^{se} = (z^{se}_1,z^{se}_2)$, respectively. Note that if $z \in \mathscr{D}$ is a singleton, we have $z^{nw} = z^{se}$. The process of adding an additional singleton or line segment (or a union of several singletons and line segments) to $\mathscr{D}$ consists of: (i) removing from storage the subset of any $z \in \mathscr{D}$ which is dominated by the input, (ii) adding to storage the subset of the input which is not dominated by any currently stored $z \in \mathscr{D}$. We denote this procedure as \textsc{Insert}$(\cdot,\mathscr{D})$.
+
+The basic strategy of SPEM is very simple and the pseudocode is provided in Algorithm \ref{alg1}.
+\begin{algorithm}[h!] 
+  \caption{Slice Problem Exploitation Method.\\
+  \underline{Input}: Instance $\mathcal{I}$ of BOMILP.\\
+  \underline{Output}: The Pareto set of $\mathcal{I}$, stored in $\mathscr{D}$.}
+  \label{alg1}
+  \begin{algorithmic}[1]
+    \Function{SPEM}{$\mathcal{I}$} 
+    	\State Let $\mathscr{D} = \emptyset$.
+    	\For{$k \in \{1,2\}$}
+    	 	\State Let ${x}^k_I = \argmax\{f_k(x): x\in {X}_I\}$. 
+    	 	\State $\mathcal{P}({x}^k_I)$ = \textsc{GeneratePareto}$({x}^k_I)$. 
+    	 	\State \textsc{Insert}($\mathcal{P}({x}^k_I),\mathscr{D}$).
+    	\EndFor
+    	\State Let $b^1 = (\objf(x_I^2),\objf(x_I^1))$ and $b^2 = \emptyset$.
+    	\State $\mathscr{D} =$ \textsc{ExploreBox}($b^1,b^2,\mathscr{D}$).
+    	\State Return $\mathscr{D}$.
+    \EndFunction
+  \end{algorithmic}
+\end{algorithm} 
+Through use of a ``for'' loop, on line 4 we solve two single objective MILPs, one for each $f_1(x)$ and $f_2(x)$. The image of the solution of the MILP associated with $f_2(x)$ then forms the northwest corner of the first box we will explore. Similarly, the image of the solution of the MILP associated with $f_1(x)$ forms the southeast corner. %Note that this box is either $\OS$ or a superset of $\OS$. 
+For use in later algorithms, we define the point \[z^* = \left(f_1(x^1_I),f_2(x^2_I)\right).\] On line 8 we call the function \textsc{ExploreBox}, which serves several purposes: (i) the set $Y_N^1$ of Pareto solutions to BOMILP \eqref{BOMILP} which lie within  $b^1$ (the first argument) is computed, (ii) $Y_N^1$ is added to $\mathscr{D}$, (iii) under a special set of circumstances the orientation of $b^2$ (the second argument) is modified, and (iv) $\mathscr{D}$ is returned. Clearly, the key aspect of SPEM is this \textsc{ExploreBox} procedure. We provide the pseudocode for \textsc{ExploreBox} in Algorithm \ref{alg2}.
+\begin{algorithm}[h!] 
+  \small
+  \caption{Explore a rectangular subset of $\OS$.\\
+  \underline{Input}: Two rectangular subsets of $\OS$, denoted $b^1$ and $b^2$, and data structure $\mathscr{D}$.\\
+  \underline{Output}: $\mathscr{D}$ (potentially updated).}
+  \label{alg2}
+  \begin{algorithmic}[1]
+    \Function{ExploreBox}{$b^1,b^2,\mathscr{D}$} 
+    	\State Let $z^1 := \{z \in \mathscr{D}: z \cap b^1 = z \text{ and } z^{nw} \leq \hat{z}^{nw} \text{ for all } \hat{z} \in \mathscr{D}\setminus z \text{ such that } \hat{z} \cap b^1 = \hat{z}\}$.
+    	\State Let $z^2 := \{z \in \mathscr{D} \setminus z^1: z^{nw} \geq z^{1,se} \text{ and } z^{nw} \leq \hat{z}^{nw} \text{ for all } \hat{z} \in \mathscr{D} \setminus{z^1} \text{ such that } \hat{z}^{nw} \geq z^{1,se} \}$.
+    	\If{$z^{1,se} = z^{2,nw}$}
+			\If{$z^2 \cap b^1 \neq z^{2,nw}$}{}
+				\State Define $b^3$ so that $b^{3,nw} = b^{1,nw}$ and $b^{3,se} = (b^{1,se}_1,z^{1,se}_2)$.
+				\State Define $b^4$ so that $b^{4,nw} = z^{1,se}$ and $b^{4,se} = b^{1,se}$.		
+				\State $\mathscr{D}$ = \textsc{ExploreBox}$(b^3,b^4,\mathscr{D})$.
+				\State $\mathscr{D}$ = \textsc{ExploreBox}$(b^4,\emptyset,\mathscr{D})$.
+			\Else
+				\State Let $s$ denote the slope of $z^1$ and let $x_I^w = \argmax\{f_w(x):= f_1(x)-\frac{1}{s}f_2(x): b^{1,nw}_1 \leq f_1(x) \leq  b^{1,se}_1, b^{1,se}_2 \leq f_2(x) \leq  b^{1,nw}_2, x \in X_I\}$.
+				\State $\mathcal{P}({x}^w_I)$ = \textsc{GeneratePareto}$({x}^w_I)$. 
+				\State \textsc{Insert}($\mathcal{P}({x}^w_I),\mathscr{D}$).
+				\If{$f_w(x_I^w)= z^{1,nw}_1 - \frac{1}{s}z^{1,nw}_2$}{ return $\mathscr{D}$.}
+				\Else
+					\If{$b^2 \neq \emptyset$}
+					\State Find $z \in \mathscr{D}$ such that $f_w(x_I^w) \cap z \neq \emptyset$. 
+					\State Modify $b^1$ so that $b^{1,se}_2 = z^{nw}_2$.
+					\State Modify $b^2$ so that $b^{2,nw} = z^{nw}$.
+					\EndIf
+					\State $\mathscr{D}$ = \textsc{ExploreBox}$(b^1,\emptyset,\mathscr{D})$.
+				\EndIf
+			\EndIf
+		\Else
+			\State Let $\beta = \frac{z^*_2-z^{2,nw}_2}{z^*_1-z^{1,se}_1+z^*_2-z^{2,nw}_2}$.
+			\State Let $(t^c,x_I^c) = \argmin\{t: t \geq \beta(z^*_1-f_1(x)), t \geq (1-\beta)(z^*_2-f_2(x)), t \in \R, x \in X_I\}$.
+			\State $\mathcal{P}({x}^c_I)$ = \textsc{GeneratePareto}$({x}^c_I)$. 
+			\State \textsc{Insert}($\mathcal{P}({x}^c_I),\mathscr{D}$).
+			\If{$t^c = \beta(z^*_1-z^{1,se}_1)$}
+				\State Define $b^3$ so that $b^{3,nw} = b^{1,nw}$ and $b^{3,se} = z^{1,se}$.
+				\State Define $b^4$ so that $b^{4,nw} = z^{2,nw}$ and $b^{4,se} = b^{1,se}$.		
+				\State $\mathscr{D}$ = \textsc{ExploreBox}$(b^3,\emptyset,\mathscr{D})$.
+				\State $\mathscr{D}$ = \textsc{ExploreBox}$(b^4,\emptyset,\mathscr{D})$.
+			\Else{ $\mathscr{D}$ = \textsc{ExploreBox}$(b^1,\emptyset,\mathscr{D})$.}
+			\EndIf
+		\EndIf
+		\State Return $\mathscr{D}$.
+    \EndFunction
+  \end{algorithmic}
+\end{algorithm} 
+Note that $z^1$, defined on line 2, is the left-most $z \in \mathscr{D}$ such that $z$ is contained in $b^1$. Similarly, $z^2$, defined on line 3, is the left-most $z \in \mathscr{D}$ that lies to the right of $z^1$. Consider the following two cases:\\[2mm]
+{\underline{Case 1}}: There is no separation between $z^1$ and $z^2$ (i.e. the ``if'' statement on line 4 is satisfied).\\[2mm]
+{\underline{Case 2}}: There is separation between $z^1$ and $z^2$.\\[2mm]
+Case 1 is processed on lines 4--20. If $b^1$ contains more of $z^2$ than $z^{2,nw}$ we use the horizontal line containing $z^{1,se}$ to split $b^1$ into two sub-boxes, and then these sub-boxes are explored, beginning with the upper box. If $b^1 \cap z^2 = z^{2,nw}$ we use the weighted sum scalarization technique \citep{geoffrion1968proper} to determine whether or not any Pareto solutions exist above and to the right of $z^1$. If such solutions are discovered (i.e., the ``if'' statement on line 14 is not satisfied), we re-explore $b^1$. Otherwise, we know $z^1 \in Y_N$. (Note that we will clarify the use of lines 16--19 via the example presented in the next section.)
+
+Case 2 is processed on lines 21--31. We use the weighted Chebyshev scalarization technique \citep{steuer1983,ralphs2006improved} to determine whether or not any Pareto solutions exist to the right of $z^1$ and above $z^2$. If such solutions are discovered (i.e., the ``if'' statement on line 26 is not satisfied), we re-explore $b^1$. Otherwise, we know that if $b^1$ contains any Pareto solutions, they lie within either $b^3 = (b^{1,nw},z^{1,se})$ or $b^4 = (z^{2,nw},b^{1,se})$. Hence, we explore each of these boxes, beginning with $b^3$.
+
+The final algorithm we present in this section is that of the \textsc{GeneratePareto} procedure that we use for generating $\mathcal{P}(x^*)$ for a given $x^* \in X_I$. For use in this algorithm, we introduce the following LP.
+\begin{multline}
+\mathscr{P}(\alpha,x^*):=\max\{ f_1(x) + \alpha f_2(x):\\ x^\Z = (x^*)^\Z, x \in X_I\}
+\end{multline}
+The pseudocode for \textsc{GeneratePareto} is given in Algorithm \ref{alg3}.
+\begin{algorithm}[h] 
+%\small
+  \caption{Generate $\mathcal{P}(x)$\\
+  \underline{Input}: $x^* \in X_I$.\\
+  \underline{Output}: $\mathcal{P}(x^*)$.}
+  \label{alg3}
+  \begin{algorithmic}[1]
+    \Function{GeneratePareto}{$x$} 
+        \State Set $\mathcal{B} = \emptyset$.
+        \State Let $y' = \objf(x')$, where $x' = \argmax\{f_2(x): x^\Z = (x^*)^\Z, x \in X_I\}$.
+    	\State Let $y = \objf(x)$, where $x$ is the optimal solution to $\mathscr{P}(0,x^*)$.
+    	\While{$y' \neq y$}{}
+    		\State Use sensitivity analysis to obtain an interval $[\alpha',\alpha'']$ such that $x$ is optimal to $\mathscr{P}(\alpha,x^*)$ for all $\alpha \in [\alpha',\alpha'']$.
+    		\State Let $\alpha^*$ be the negative reciprocal of the slope of the line segment connecting $y$ and $y'$.
+    		\State Update $x$ to be the optimal solution of $\mathscr{P}(\alpha'' + \epsilon,x^*)$ for sufficiently small $\epsilon \in (0,\alpha^*-\alpha'']$.
+    		\If{$\objf(x) \neq y$}
+    			\State {Add the line segment connecting $\objf(x)$ and $y$ to $\mathcal{B}$. Update $y$ to be $\objf(x)$.}
+    		\EndIf
+    	\EndWhile
+    	\State Return $\mathcal{B}$.
+    \EndFunction
+  \end{algorithmic}
+\end{algorithm} 
+We note that this algorithm depends on a tolerance level $\epsilon$ and, in general, produces an approximation of $\mathcal{P}(x)$ because if in any iteration, $\epsilon$ is not chosen sufficiently small, \textsc{GeneratePareto} can fail to compute an extreme point of $\mathcal{P}(x)$. We also note, however, that this does not affect the correctness of SPEM because if \textsc{GeneratePareto} fails to compute any extreme point of $\mathcal{P}(x)$, this extreme point will later be discovered as the solution to a MILP during a call to \textsc{ExploreBox}. $\mathcal{P}(x)$ can then be updated appropriately when this happens. Additionally, we point out that with $\epsilon$ set to $10^{-7}$ during computational testing, \textsc{GeneratePareto} correctly computed all extreme points for the Pareto sets of each slice problem considered for each instance of BOMILP solved in Section \ref{sec:compute}. 
+
+The finiteness and correctness of SPEM are argued in Section \ref{theory}. We now proceed to Section \ref{example}, where we present an example of using SPEM to solve a small instance of BOMILP. 
+
+\section{An Illustrative Example}\label{example}
+
+Consider an instance $\mathcal{I}$ of BOMILP with five distinct feasible $x \in X_I$. Suppose the Pareto sets of the slice problems associated with each of these solutions are as displayed in Figure \ref{fig_ex_1}.
+\begin{figure}[h!]
+\begin{subfigure}[h]{.2\textwidth}
+\centering
+%\includegraphics[scale=.14]{ex_1_4}
+\caption{\textbf{Pareto sets of all slice problems.}}\label{fig_ex_1}
+\end{subfigure}\hfill%
+\begin{subfigure}[h]{.2\textwidth}
+\centering
+%\includegraphics[scale=.14]{ex_2}
+\caption{\textbf{$\mathcal{D}$ and $b^1$ after lines 2--7 of \textsc{SPEM}($\mathcal{I}$).}}\label{fig_ex_2}
+\end{subfigure}
+\caption{}
+\end{figure}
+We process instance $\mathcal{I}$ by calling \textsc{SPEM}$(\mathcal{I})$. The solutions $x_I^1$ and $x_I^2$, as computed on line 4 of Algorithm \ref{alg1}, correspond to $x^4$ and $x^1$ in Figure \ref{fig_ex_1}. Additionally, $\objf(x^4)$ and $\objf(x^1)$ are depicted as a star and square, respectively, in Figure \ref{fig_ex_1}. We now create $b^1 = (\objf(x^1),\objf(x^4))$ and call \textsc{ExploreBox}$(b^1,\emptyset,\mathscr{D})$. The segments currently stored in $\mathscr{D}$ and $b^1$ (outlined by a dashed line) are displayed in Figure \ref{fig_ex_2}. Segments $z^1$ and $z^2$, computed on lines 2 and 3 of Algorithm \ref{alg2}, are also depicted in Figure \ref{fig_ex_2}. Since $z^{1,se} = z^{2,nw}$ and $z^2 \cap b^1 = z^2$, we split $b^1$ into $b^3$ and $b^4$, where $b^{3,nw} = b^{1,nw}$,  $b^{3,se} = (b^{1,se}_1,z^{1,se}_2)$, $b^{4,nw} = z^{1,se}$ and $b^{4,se} = b^{1,se}$. Figure \ref{fig_ex_3} shows $b^3$ (dashed) and $b^4$ (solid). 
+\begin{figure}[h!]
+\begin{subfigure}[h]{.2\textwidth}
+\centering
+%\includegraphics[scale=.14]{ex_3}
+\caption{\textbf{First split of a box, $z^1$ and $z^2$ when processing the second box.}}\label{fig_ex_3}
+\end{subfigure}\hfill%
+\begin{subfigure}[h]{.2\textwidth}
+\centering
+%\includegraphics[scale=.14]{ex_4_2}
+\caption{\textbf{New Pareto solution from solving weighted Chebyshev MILP.}}\label{fig_ex_4}
+\end{subfigure}
+\caption{}
+\end{figure}
+We now call \textsc{ExploreBox}$(b^3,b^4,\mathscr{D})$. In this iteration we reach line 10 of Algorithm \ref{alg2}. By construction, the weighted sum MILP solved on line 11 will reveal a Pareto solution above and to the right of the segment contained in the dashed box, if such a solution exists. Since there are no such solutions, this iteration terminates and we now process box $b^4$. The segments computed as $z^1$ and $z^2$ during this iteration are displayed in Figure \ref{fig_ex_3}. In this situation we reach line 22 of Algorithm \ref{alg2}. By construction, the weighted-Chebyshev MILP solved on line 23 will reveal a Pareto solution to the right of $z^1$ and to above $z^2$, if such a solution exists. In this case, a Pareto solution is discovered (depicted as a star in Figure \ref{fig_ex_4}) and $x^3$ (from Figure \ref{fig_ex_1}) is revealed. As a result, $\mathcal{P}(x^3)$ is computed and added to $\mathscr{D}$ and then we re-process box $b^4$. The solutions now stored in $\mathscr{D}$, as well as updated segments $z^1$ and $z^2$, are shown in Figure \ref{fig_ex_4}. This iteration is analogous to the last, with the exception that no new Pareto solutions are discovered when solving the MILP on line 23. Hence, we reach line 27 of Algorithm \ref{alg2} and split the current box into two sub-boxes as displayed in Figure \ref{fig_ex_5}. 
+\begin{figure}[h!]
+\begin{subfigure}[h]{.2\textwidth}
+\centering
+%\includegraphics[scale=.14]{ex_5_2}
+\caption{\textbf{Box split after weighted Chebyshev reveals no new solutions.}}\label{fig_ex_5}
+\end{subfigure}\hfill%
+\begin{subfigure}[h]{.2\textwidth}
+\centering
+%\includegraphics[scale=.14]{ex_6}
+\caption{\textbf{Box split for which the next new Pareto solution is discovered.}}\label{fig_ex_6}
+\end{subfigure}
+\caption{}
+\end{figure}
+Processing the dashed box of Figure \ref{fig_ex_5} will result in no new Pareto solutions, so we move to the solid box. Initially, processing this box will be analogous to our first two iterations. In fact, no new Pareto solutions will be revealed until we process the dashed box of Figure \ref{fig_ex_6}. The newly discovered solution is shown as a star in Figure \ref{fig_ex_7}. 
+\begin{figure}[h!]
+\centering
+%\includegraphics[scale=.14]{ex_7}
+\caption{\textbf{New Pareto solution found while solving weighted sum MILP, reoriented boxes, and final set of solutions stored in $\mathscr{D}$.}}\label{fig_ex_7}
+\end{figure}
+We point out that the discovery of this solution is also precisely the type of situation in which we reach lines 18 and 19 of Algorithm \ref{alg2}. Thus, the dashed and solid boxes depicted in Figure \ref{fig_ex_6} are reoriented and become the dashed and solid boxed shown in Figure \ref{fig_ex_7}, respectively. The remainder of the iterations required for this example are analogous to those already reviewed, so we cease our discussion here. Note that the final set of Pareto solutions stored in $\mathscr{D}$ appears in Figure \ref{fig_ex_7}.
+
+\section{Theoretical Results}\label{theory}
+
+In this section we argue the correctness and finiteness of SPEM, beginning with the former. Consider the following propositions. 
+
+\begin{prop}\label{prop1}
+Suppose a box $b \subset \R^2$ is being explored using Algorithm \ref{alg2}. If $x_I^w$ is an optimal solution of the weighted sum MILP 
+\begin{multline*}
+\max\{f_w(x):= f_1(x)-\frac{1}{s}f_2(x):\\ b^{1,nw}_1 \leq f_1(x) \leq  b^{1,se}_1,\\ b^{1,se}_2 \leq f_2(x) \leq  b^{1,nw}_2, x \in X_I\}
+\end{multline*} solved on line 11, then $\objf(x_I^w) \in Y_N$. Furthermore, if $f_w(x_I^w)= z^{1,nw}_1 - \frac{1}{s}z^{1,nw}_2$ then all $y \in z^1$ are in $Y_N$.
+\end{prop}
+
+\begin{proof}
+We begin by proving the first statement. It is well known \citep{ehrgott2005multicriteria} that when the feasible set of a weighted sum MILP is $X_I$ and the weights are positive constants, the optimal solution is efficient and thus its image is Pareto. The MILP we solve is constructed with positive weights, but its feasible set is a subset of $X_I$. Even so, the order in which boxes are explored in SPEM ensures that $\objf(x_I^w) \in Y_N$ because all boxes that lie above $b$ are explored before $b$. Thus, if there were to exist $y \in Y_N$ such that $y \dom \objf(x_I^w)$, $y$ would be discovered before exploring $b$. Additionally, SPEM is designed so that if a new solution $\hat{y}$ is discovered while processing a box $\hat{b}$, no box processed after $\hat{b}$ will contain points dominated by $\hat{y}$. Hence, the existence of $y$ contradicts the discovery of $x_I^w$ as an optimal solution of the weighted sum MILP.
+
+The proof of the second statement is due to the construction of $f_w$. Using 1 as the weight on $f_1$ and the negative reciprocal of the slope of $z^1$ as the weight on $f_2$ when constructing $f_w$ ensures that the value of $f_w(x)$ is invariant for any $x \in X_I$ that maps to a point in $\OS$ that lies on $z_1$. Thus, since $f_w(x_I^w)= z^{1,nw}_1 - \frac{1}{s}z^{1,nw}_2$ implies that the value of $f_w$ evaluated at $x_I^w$ and the value of $f_w$ evaluated at the pre-image of $z^{1,nw}$ are equal, the result holds.
+\end{proof}
+
+\begin{prop}\label{prop2}
+Suppose a box $b \subset \R^2$ is being explored using Algorithm \ref{alg2}. If $(t^c,x_I^c)$ is an optimal solution of the weighted Chebyshev MILP 
+\begin{multline*}
+\min\{t: t \geq \beta(z^*_1-f_1(x)),\\ t \geq (1-\beta)(z^*_2-f_2(x)), t \in \R, x \in X_I\}
+\end{multline*} solved on line 23, then $\objf(x_I^c) \in Y_N$.
+\end{prop}
+
+\begin{proof}
+This result is already well known \citep{bowman1976}.
+\end{proof}
+
+\begin{prop}\label{prop3}
+At termination of SPEM, $y \in Y_N$ if and only if $y \in z$ for some $z \in \mathscr{D}$. 
+\end{prop}
+
+\begin{proof}
+$(\Rightarrow)$ Consider the first box $b$ explored by SPEM. Initially $\mathscr{D}$ contains at least two $z$, say $z^1$ and $z^2$, such that $z^{1,nw}_2 = b^{nw}_2$ and $z^{2,se}_1 = b^{se}_1$, i.e., there is not a vertical gap between the top of $b$ and the north-west point of $z^1$ and there is not a horizontal gap between the right of $b$ and the south-east point of $z^2$. Then SPEM proceeds by using weighted sum MILPs to find all solutions above and to the right of any $z \in \mathscr{D}$ and weighted Chebyshev MILPs to find all solutions to the right of $\hat{z}$ and above $\tilde{z}$ for any pair of non-intersecting, adjacent $\hat{z},\tilde{z} \in \mathscr{D}$. If any new solutions are found when solving these MILPs, the process repeats. Hence, at termination there cannot exist any solutions to BOMILP above and to the right of any $z \in \mathscr{D}$ or to the right of $\hat{z}$ and above $\tilde{z}$ for any pair of non-intersecting, adjacent $\hat{z},\tilde{z} \in \mathscr{D}$. Thus, all $y \in Y_N$ are stored in $\mathscr{D}$.
+
+$(\Leftarrow)$
+This direction of the proof follows directly from Propositions \ref{prop1} and \ref{prop2} and the fact that $\mathscr{D}$ is designed so that there cannot exist $z^1, z^2 \in \mathscr{D}$ for which some $y^1 \in z^1$ dominates some $y^2 \in z^2$.
+\end{proof}
+
+Proposition 3 ensures the correctness of SPEM. We now establish the finiteness. Consider the following results.
+
+\begin{prop}\label{prop4}
+SPEM always terminates in finite time.
+\end{prop}
+
+\begin{proof}
+Recall that we assume that BOMILP \eqref{BOMILP} is feasible. Thus solutions will be discovered during execution of Algorithm \ref{alg1}, ensuring that Algorithm \ref{alg2} is called. When exploring a box $b$ in Algorithm \ref{alg2} there are only three possibilities: (i) it is shown that no new Pareto solutions exist in $b$ and $b$ is no longer considered, (ii) a slice problem is discovered having a Pareto set which contains at least one point that is within $b$ and Pareto for BOMILP; $b$ is then reprocessed, or (iii) it is shown that a subset of $b$ cannot contain Pareto solutions and two specific sub-boxes are then explored. Of these three possibilities, the finiteness of SPEM comes into question only from (ii). However, we note that by construction, each slice problem having a Pareto set which contains at least one point that is Pareto for BOMILP can be discovered at most once during the execution of SPEM. Moreover, since we assume that neither $f_1$ nor $f_2$ are unbounded in $X_I$, there are a finite number of such slice problems. Thus, SPEM must terminate in a finite number of iterations.
+\end{proof}
+
+\begin{prop}\label{prop5}
+Let $n$ denote the number of $x \in x_I$ having distinct $\mathcal{P}(x)$ for which $\mathcal{P}(x) \cap Y_N \neq \emptyset$, let $s_1$ and $s_2$ denote the number of individual line segments and singletons in $\R^2$ that make up $Y_N$, respectively, and let $g$ denote the number of pairs of adjacent, non-intersecting segments/singletons in $Y_N$. Then, under the assumption that \textsc{GeneratePareto} correctly computes $\mathcal{P}(x^*)$ for a given $x^* \in X_I$, the number of MILPs solved during SPEM is at most $n+s_1+g+2$.
+\end{prop}
+
+\begin{proof}
+In the worst case, one MILP solve is needed to reveal each slice problem having a Pareto set which contains a point that is Pareto for BOMILP (this result can be improved by using a heuristic to generate a set of solutions prior to or during the execution of SPEM). This requires $n$ MILP solves. Recall that at termination of SPEM, $Y_N$ is stored in $\mathscr{D}$. For each $z$ in $\mathscr{D}$ that represents a segment, a weighted sum MILP is solved to prove it is Pareto. This requires solving $s_1$ MILPs. Additionally, for each pair $(z^1,z^2)$ of adjacent, non-intersecting segments/singletons with $z^{1,se}_1 \leq z^{2,nw}_1$ in $\mathscr{D}$, a weighted Chebyshev MILP is solved to prove that no Pareto solutions exist above $z^{2,nw}$ and right of $z^{1,se}$. This requires solving $g$ MILPs. Finally, it is possible that either one (or both) of the two MILPs solved in Algorithm \ref{alg1} may yield solutions that are dominated by solutions discovered in Algorithm \ref{alg2}. The result follows.
+\end{proof}
+
+\section{Computational Analysis} \label{sec:compute}
+We implemented SPEM using the C programming language and the ILOG CPLEX optimization package \citep{cplex126}.  We compare the performance of SPEM to two other objective space search algorithms and one variable space search algorithm. The objective space search algorithms we compare to are the triangle splitting algorithm (TSA) of \citet{boland2015criterion} and the $\epsilon$,Tabu--constraint algorithm ($\epsilon$T) of \citet{soylu2016exact}. The variable space algorithm we use is the branch-and-bound technique (BB) of \citet{adelgren2016}. All testing was conducted using a personal computer with a 3.40 GHz processor and 16GB of RAM, running Linux Mint 18.%\pagebreak
+
+For testing, we utilized instances made available by the authors of  \citep{adelgren2016,belotti2012biobjective,boland2015criterion}. The instances from \citep{belotti2012biobjective} contained either 20 variables and 20 constraints, 40 variables and 40 constraints, 60 variables and 60 constraints, or 80 variables and 80 constraints. We label these instance sets ``Be20,'' ``Be40,'' ``Be60,'' and ``Be80,'' respectively. In a similar fashion, we label the instances from \citep{boland2015criterion} as ``Bo20,'' ``Bo40,'' ``Bo80,'' ``Bo160,'' and ``Bo320.'' The instances from \citep{adelgren2016} are generated from classically challenging instances of MILP found in the MIPlib 2010 library \citep{KochEtAl2011} by adding a variety of second objectives. As such, we use the same labelling for these instances as was used in \citep{adelgren2016}. Note that due to the size and difficulty of the majority of these instances, we were only able to utilize a small subset of them in this work.
+
+We compare the performance of all algorithms using two metrics: (i) CPU time, and (ii) number of MILPs solved. The use of CPU time is necessary particularly due to the fact that number of MILPs solved is not a useful metric when comparing to variable space algorithms such as the BB of \citet{adelgren2016}. However, CPU time can be somewhat misleading when comparing two objective space search algorithms if the algorithms utilize different underlying MILP solvers, utilize different settings within a given MILP solver, utilize different tolerance measurements for optimality, etc. Thus, when comparing objective space search methods, number of MILPs solved may be a better metric, though it too has its faults since the structure and size of the MILPs solved in one objective space search method can vary greatly from the structure and size of the MILPs solved in another.
+
+We note here that since the code for the $\epsilon$T method was not available to us, we cannot report CPU times for this method, but only the number of MILPs solved as reported in \citep{soylu2016exact}. For this same reason, we were unable to utilize the $\epsilon$T method on the MIPlib instances from \citep{adelgren2016}. Additionally, not all instances from \citep{belotti2012biobjective} were considered in \citep{soylu2016exact}, so the numbers of MILPs we report for the $\epsilon$T method on these instances are approximated based on the values reported in \citep{soylu2016exact}.
+
+The results of our tests are summarized in Tables \ref{tab1} and \ref{tab2}.%
+\begin{table}[h!]
+\scriptsize
+\caption{\textbf{Results for instances from \citep{belotti2012biobjective} and \citep{boland2015criterion}.}}\label{tab1}
+\begin{tabular}{lrrrrrr}
+& \multicolumn{2}{c}{TSA} & \multicolumn{1}{c}{$\epsilon$T} & \multicolumn{2}{c}{SPEM} & \multicolumn{1}{c}{BB}\\
+\cline{2-3}
+\cline{4-4}
+\cline{5-6}
+\cline{7-7}
+Prob & CPU & \#M & \#M & CPU & \#M & CPU\\
+\hline
+\hline
+Be20 & 0.4 & 107.4&	44.9 &0.1 &	44.0 &	0.1\\
+Be40 & 2.4 & 192.3&  75.0   &	1.0 &	83.5 &	0.6\\
+Be60 & 6.0 & 213.0& $\dagger$  &	3.1 &	96.9 &	2.0\\
+Be80 & 13.5 &	250.4&      128.5    &	7.2 &	117.6& 4.7\\
+\hline
+Bo20 & 0.3&	133.2&	56.8& 0.1&	53.6&	0.1\\
+Bo40 & 2.2&	428.6&	201.2& 0.9 &	205.2&	0.2\\
+Bo80 & 29.6 &	1609.6&	940.6 & 15.4&	964.0&	3.4\\
+Bo160 & 265.6&	2969.2&	3676.2& 319.4&	3825.2&71.01\\
+Bo320 & 2819.2&	4399.0 & 14706.0 & 8475.4&	15561.0 &	1805.8\\
+\hline
+\multicolumn{7}{l}{\scriptsize Values are averaged over all available instances of each type.}\\
+\multicolumn{7}{l}{\scriptsize $\dagger$ -- Not reported in \citep{soylu2016exact}.}
+\end{tabular}
+\end{table}%
+\begin{table}[h!]
+\footnotesize
+\caption{\textbf{Results for instances from \citep{adelgren2016}.}}\label{tab2}
+\begin{tabular}{lrrrrr}
+& \multicolumn{2}{c}{TSA} & \multicolumn{2}{c}{SPEM} & \multicolumn{1}{c}{BB}\\
+\cline{2-3}
+\cline{4-5}
+\cline{6-6}
+Prob & CPU & \#M & CPU & \#M & CPU\\
+\hline
+\hline
+bienst2 -- o      & 829.5 & 43  & 722.2  & 20 & 564.4\\
+binkar10\_1 -- d  & 831.0 & 58  & 1355.9 & 45 & 2419.6\\
+neos13 -- c       & 366.7 & 14  & 110.3  & 6  & 153.2\\
+neos-1396125 -- a & 198.5 & 4   & 48.8   & 3  & 413.5\\
+%neos-1396125 -- b & -- & --   & --  & --  & --\\
+neos-693347 -- c  & 216.5 & 7   & 122.2  & 4  & 168.7\\
+neos-693347 -- d  & 233.6 & 7   & 122.1  & 4  & 178.7\\
+neos-916792 -- a  & 148.8 & 12  & 207.8  & 3  & $\circledast$\\
+noswot -- o       & 478.3 & 146 & 290.1  & 61 & 3561.9\\
+noswot -- d       & 398.6 & 64  & 97.8   & 16 & 1835.5\\
+pigeon-10 -- o    & 661.1 & 23  & 61.23  & 10 & 1378.7\\
+qiu -- a          & 479.2 & 136 & 327.6  & 44 & 1149.3\\
+\hline
+\multicolumn{5}{l}{\scriptsize $\circledast$ -- not solved in 12 hours}
+\end{tabular}
+\end{table}
+In these tables, the symbol ``CPU'' indices CPU time in seconds and ``\#M'' indicates the number of MILPs solved. From Table \ref{tab1}, recognize that SPEM outperforms TSA in terms of both CPU time and number of MILPs solved for all instance types except Bo160 and Bo320. Additionally, for all instance types, the number of MILPs solved by SPEM is comparable to the number of MILPs solved by $\epsilon$T as is reported in \citep{soylu2016exact}. In order to determine the cause of the severe difference in performance between SPEM and TSA for the Bo160 and Bo320 instances, we studied the structure of these problems and their Pareto sets. It seems that for all instances from \citep{boland2015criterion}, the Pareto sets consist mostly of segments, all of which are relatively small and tightly packed along a curve in $\OS$ which has a seemingly parabolic shape. As discussed in \citep{boland2015criterion}, the TSA has the ability to employ LP based enhancements that allow the procedure to solve LPs in place of MILPs once a large number of Pareto solutions have been discovered. It seems that the case in which a Pareto sets consists mostly of relatively small segments is a situation in which this enhancement is quite powerful. Thus, we suspect that these enhancements play a significant role in the performace of TSA for the instances from \citep{boland2015criterion}, particularly the larger of these instances. We also point out that for the instances considered in Table \ref{alg1}, all the objective space algorithms are outperformed in terms of CPU time by the BB technique of \citep{adelgren2016}.
+
+From Table \ref{tab2}, recognize that SPEM outpeforms BB in terms of CPU time on all instances. This seems to be due to the more challenging structure and size of the instances considered here. Additinally, SPEM outpeforms TSA in terms of number of MILPs solved on all instances and in terms of CPU time on almost all instances. We believe that the results displayed in Table \ref{tab2} are extremely important, even more so than those in Table \ref{tab1}, because they show that through the development of SPEM we have made progress towards developing a solver for BOMILP that can handle challenging instances, many of which have been developed from real-world problems.
+
+\section{Conclusion} \label{sec:conclude}
+We have introduced a new objective space search technique for solving BOMILP. We have argued the correctness and finiteness of our procedure and also conducted initial computational experiments. The results show that  our procedure performs competitively with both the triangle splitting algorithm of \citet{boland2015criterion} and the $\epsilon$,Tabu-constraint method of \citet{soylu2016exact} on small, relatively simple instances from the literature. The branch-and-bound algorithm of \citet{adelgren2016} clearly outperforms all of these methods, including the one presented here, for these small instances, though. On the other hand, initial results are promising for large, challenging instances from the literature, since our proposed method outperforms both the triangle splitting algorithm and the branch-and-bound method for almost all of these instances that were examined at the time of writing this paper. 
+
+In the near future we will perform more rigorous testing, utilizing all MIPlib instances from \citep{adelgren2016} and report these results. Additionally, we will seek to obtain code for the $\epsilon$,Tabu-constraint method so that more extensive and more accurate results from its use can be reported. In the long term, we plan to modify the proposed procedure slightly so as to allow for parallelization, develop a parallelized version of the procedure, and report on its implementation and computational performance.
+
+\bibliographystyle{abbrvnat}
+\bibliography{/home/nate/Documents/bibtex_files/4th_exam_citations}
+%\printbibliography
+
+\end{document}

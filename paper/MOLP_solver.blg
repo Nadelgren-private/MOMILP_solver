@@ -1,0 +1,59 @@
+This is BibTeX, Version 0.99d (TeX Live 2015/Debian)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: MOLP_solver.aux
+The style file: abbrvnat.bst
+Database file #1: /home/nate/Documents/bibtex_files/4th_exam_citations.bib
+Warning--entry type for "cplex126" isn't style-file defined
+--line 18 of file /home/nate/Documents/bibtex_files/4th_exam_citations.bib
+Warning--empty journal in polyscip
+Warning--empty year in polyscip
+Warning--empty year in polyscip
+Warning--empty journal in inner
+Warning--empty year in inner
+Warning--empty year in inner
+Warning--empty journal in moplib
+Warning--empty year in moplib
+Warning--empty year in moplib
+Warning--empty journal in bensolve
+You've used 40 entries,
+            2773 wiz_defined-function locations,
+            833 strings with 10945 characters,
+and the built_in function-call counts, 17854 in all, are:
+= -- 1628
+> -- 923
+< -- 34
++ -- 317
+- -- 277
+* -- 1427
+:= -- 2744
+add.period$ -- 127
+call.type$ -- 40
+change.case$ -- 208
+chr.to.int$ -- 40
+cite$ -- 90
+duplicate$ -- 832
+empty$ -- 1514
+format.name$ -- 345
+if$ -- 3720
+int.to.chr$ -- 1
+int.to.str$ -- 1
+missing$ -- 41
+newline$ -- 213
+num.names$ -- 162
+pop$ -- 413
+preamble$ -- 1
+purify$ -- 171
+quote$ -- 0
+skip$ -- 625
+stack$ -- 0
+substring$ -- 747
+swap$ -- 66
+text.length$ -- 5
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 425
+warning$ -- 10
+while$ -- 180
+width$ -- 0
+write$ -- 527
+(There were 11 warnings)

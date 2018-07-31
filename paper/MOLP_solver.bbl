@@ -1,0 +1,271 @@
+\begin{thebibliography}{40}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Adelgren and Gupte(2016)]{adelgren2016}
+N.~Adelgren and A.~Gupte.
+\newblock Branch-and-bound for biobjective mixed-integer programming.
+\newblock \emph{Optimization Online}, 2016.
+\newblock URL
+  \url{http://www.optimization-online.org/DB_FILE/2016/10/5676.pdf}.
+
+\bibitem[Adelgren et~al.(2014)Adelgren, Belotti, and Gupte]{adelgren2014}
+N.~Adelgren, P.~Belotti, and A.~Gupte.
+\newblock Efficient storage of {P}areto points in biobjective mixed integer
+  programming.
+\newblock \emph{Under Review}, 2014.
+\newblock URL \url{http://arxiv.org/abs/1411.6538}.
+
+\bibitem[Aneja and Nair(1979)]{aneja1979bicriteria}
+Y.~P. Aneja and K.~P. Nair.
+\newblock Bicriteria transportation problem.
+\newblock \emph{Management Science}, 25\penalty0 (1):\penalty0 73--78, 1979.
+
+\bibitem[Armand(1993)]{armand1993finding}
+P.~Armand.
+\newblock Finding all maximal efficient faces in multiobjective linear
+  programming.
+\newblock \emph{Mathematical Programming}, 61\penalty0 (1-3):\penalty0
+  357--375, 1993.
+
+\bibitem[Armand and Malivert(1991)]{armand1991determination}
+P.~Armand and C.~Malivert.
+\newblock Determination of the efficient set in multiobjective linear
+  programming.
+\newblock \emph{Journal of Optimization Theory and Applications}, 70\penalty0
+  (3):\penalty0 467--489, 1991.
+
+\bibitem[Belotti et~al.(2012)Belotti, Soylu, and
+  Wiecek]{belotti2012biobjective}
+P.~Belotti, B.~Soylu, and M.~M. Wiecek.
+\newblock A branch-and-bound algorithm for biobjective mixed-integer programs.
+\newblock Technical report, Clemson University, December 2012.
+\newblock URL
+  \url{http://www.clemson.edu/ces/math/technical_reports/belotti.bb-bicriteria.pdf}.
+
+\bibitem[Benson(1998)]{benson1998hybrid}
+H.~Benson.
+\newblock Hybrid approach for solving multiple-objective linear programs in
+  outcome space.
+\newblock \emph{Journal of Optimization Theory and Applications}, 98\penalty0
+  (1):\penalty0 17--35, 1998.
+
+\bibitem[Benson and Sun(2000)]{benson2000outcome}
+H.~Benson and E.~Sun.
+\newblock Outcome space partition of the weight set in multiobjective linear
+  programming.
+\newblock \emph{Journal of Optimization Theory and Applications}, 105\penalty0
+  (1):\penalty0 17--36, 2000.
+
+\bibitem[{Benson}(1998)]{benson1998b}
+H.~P. {Benson}.
+\newblock {Further analysis of an outcome set-based algorithm for
+  multiple-objective linear programming.}
+\newblock \emph{{J. Optim. Theory Appl.}}, 97\penalty0 (1):\penalty0 1--10,
+  1998.
+\newblock ISSN 0022-3239; 1573-2878/e.
+\newblock \doi{10.1023/A:1022614814789}.
+
+\bibitem[Benson(1998)]{benson1998outer}
+H.~P. Benson.
+\newblock An outer approximation algorithm for generating all efficient extreme
+  points in the outcome set of a multiple objective linear programming problem.
+\newblock \emph{Journal of Global Optimization}, 13\penalty0 (1):\penalty0
+  1--24, 1998.
+
+\bibitem[Boland et~al.(2015)Boland, Charkhgard, and
+  Savelsbergh]{boland2015criterion}
+N.~Boland, H.~Charkhgard, and M.~Savelsbergh.
+\newblock A criterion space search algorithm for biobjective mixed integer
+  programming: The triangle splitting method.
+\newblock \emph{INFORMS Journal on Computing}, 27\penalty0 (4):\penalty0
+  597--618, 2015.
+
+\bibitem[Bornd{\"o}rfer et~al.()Bornd{\"o}rfer, Schenker, Skutella, and
+  Strunk]{polyscip}
+R.~Bornd{\"o}rfer, S.~Schenker, M.~Skutella, and T.~Strunk.
+\newblock Polyscip 2.0.
+\newblock URL \url{http://polyscip.zib.de/}.
+
+\bibitem[Bornd{\"o}rfer et~al.(2016)Bornd{\"o}rfer, Schenker, Skutella, and
+  Strunk]{Borndoerfer2016}
+R.~Bornd{\"o}rfer, S.~Schenker, M.~Skutella, and T.~Strunk.
+\newblock Polyscip.
+\newblock In G.-M. Greuel, T.~Koch, P.~Paule, and A.~Sommese, editors,
+  \emph{Mathematical Software – ICMS 2016, 5th International Conference,
+  Berlin, Germany, July 11-14, 2016, Proceedings}, volume 9725, pages 259 --
+  264, 2016.
+\newblock \doi{10.1007/978-3-319-42432-3\_32}.
+
+\bibitem[Bowman~Jr(1976)]{bowman1976}
+V.~J. Bowman~Jr.
+\newblock On the relationship of the tchebycheff norm and the efficient
+  frontier of multiple-criteria objectives.
+\newblock In \emph{Multiple criteria decision making}, pages 76--86. Springer,
+  1976.
+
+\bibitem[Cohon(2013)]{cohon1978multiobjective}
+J.~L. Cohon.
+\newblock \emph{Multiobjective Programming and Planning}.
+\newblock New York: Academic Press, 2013.
+
+\bibitem[Csirmaz()]{inner}
+L.~Csirmaz.
+\newblock Inner -- a multiobjective linear program (molp) solver.
+\newblock URL \url{https://github.com/lcsirmaz/inner}.
+
+\bibitem[Csirmaz(2016)]{csirmaz2016using}
+L.~Csirmaz.
+\newblock Using multiobjective optimization to map the entropy region.
+\newblock \emph{Computational Optimization and Applications}, 63\penalty0
+  (1):\penalty0 45--67, 2016.
+
+\bibitem[Dauer(1987)]{dauer1987analysis}
+J.~P. Dauer.
+\newblock Analysis of the objective space in multiple objective linear
+  programming.
+\newblock \emph{Journal of Mathematical Analysis and Applications},
+  126\penalty0 (2):\penalty0 579--593, 1987.
+
+\bibitem[Dauer and Liu(1990)]{dauer1990solving}
+J.~P. Dauer and Y.-H. Liu.
+\newblock Solving multiple objective linear programs in objective space.
+\newblock \emph{European Journal of Operational Research}, 46\penalty0
+  (3):\penalty0 350--357, 1990.
+
+\bibitem[Ecker et~al.(1980)Ecker, Hegner, and Kouada]{ecker1980generating}
+J.~Ecker, N.~S. Hegner, and I.~Kouada.
+\newblock Generating all maximal efficient faces for multiple objective linear
+  programs.
+\newblock \emph{Journal of Optimization Theory and Applications}, 30\penalty0
+  (3):\penalty0 353--381, 1980.
+
+\bibitem[Ecker and Kouada(1978)]{ecker1978finding}
+J.~G. Ecker and I.~Kouada.
+\newblock Finding all efficient extreme points for multiple objective linear
+  programs.
+\newblock \emph{Mathematical Programming}, 14\penalty0 (1):\penalty0 249--261,
+  1978.
+
+\bibitem[Ehrgott(2005)]{ehrgott2005multicriteria}
+M.~Ehrgott.
+\newblock \emph{Multicriteria Optimization}, volume~2.
+\newblock Springer, 2005.
+
+\bibitem[Ehrgott and Wiecek(2005)]{ehrgott2005multiobjective}
+M.~Ehrgott and M.~M. Wiecek.
+\newblock Multiobjective programming.
+\newblock In \emph{Multiple criteria decision analysis: State of the art
+  surveys}, pages 667--708. Springer, 2005.
+
+\bibitem[Ehrgott et~al.(2012)Ehrgott, L{\"o}hne, and Shao]{ehrgott2012dual}
+M.~Ehrgott, A.~L{\"o}hne, and L.~Shao.
+\newblock A dual variant of benson’s ``outer approximation algorithm'' for
+  multiple objective linear programming.
+\newblock \emph{Journal of Global Optimization}, 52\penalty0 (4):\penalty0
+  757--778, 2012.
+
+\bibitem[Evans and Steuer(1973)]{evans1973revised}
+J.~P. Evans and R.~E. Steuer.
+\newblock A revised simplex method for linear multiple objective programs.
+\newblock \emph{Mathematical Programming}, 5\penalty0 (1):\penalty0 54--72,
+  1973.
+
+\bibitem[Geoffrion(1968)]{geoffrion1968proper}
+A.~M. Geoffrion.
+\newblock Proper efficiency and the theory of vector maximization.
+\newblock \emph{Journal of Mathematical Analysis and Applications}, 22\penalty0
+  (3):\penalty0 618--630, 1968.
+
+\bibitem[Hamel et~al.(2014)Hamel, L{\"o}hne, and Rudloff]{hamel2014benson}
+A.~H. Hamel, A.~L{\"o}hne, and B.~Rudloff.
+\newblock Benson type algorithms for linear vector optimization and
+  applications.
+\newblock \emph{Journal of Global Optimization}, 59\penalty0 (4):\penalty0
+  811--836, 2014.
+
+\bibitem[{\relax IBM-ILOG CPLEX 12.6 User's Manual. IBM}(2014)]{cplex126}
+{\relax IBM-ILOG CPLEX 12.6 User's Manual. IBM}, 2014.
+
+\bibitem[Isermann(1977)]{isermann1977enumeration}
+H.~Isermann.
+\newblock The enumeration of the set of all efficient solutions for a linear
+  multiple objective program.
+\newblock \emph{Journal of the Operational Research Society}, 28\penalty0
+  (3):\penalty0 711--725, 1977.
+
+\bibitem[Koch et~al.(2011)Koch, Achterberg, Andersen, Bastert, Berthold, Bixby,
+  Danna, Gamrath, Gleixner, Heinz, Lodi, Mittelmann, Ralphs, Salvagnin, Steffy,
+  and Wolter]{KochEtAl2011}
+T.~Koch, T.~Achterberg, E.~Andersen, O.~Bastert, T.~Berthold, R.~E. Bixby,
+  E.~Danna, G.~Gamrath, A.~M. Gleixner, S.~Heinz, A.~Lodi, H.~Mittelmann,
+  T.~Ralphs, D.~Salvagnin, D.~E. Steffy, and K.~Wolter.
+\newblock {MIPLIB} 2010.
+\newblock \emph{Mathematical Programming Computation}, 3\penalty0 (2):\penalty0
+  103--163, 2011.
+
+\bibitem[L{\"o}hne(2011)]{lohne2011vector}
+A.~L{\"o}hne.
+\newblock \emph{Vector optimization with infimum and supremum}.
+\newblock Springer Science \& Business Media, 2011.
+
+\bibitem[L{\"o}hne and Schenker()]{moplib}
+A.~L{\"o}hne and S.~Schenker.
+\newblock Moplib.
+\newblock URL \url{http://moplib.zib.de/}.
+
+\bibitem[L{\"o}hne and Wei{\ss}ing(2017)]{lohne2017vector}
+A.~L{\"o}hne and B.~Wei{\ss}ing.
+\newblock The vector linear program solver bensolve--notes on theoretical
+  background.
+\newblock \emph{European Journal of Operational Research}, 260\penalty0
+  (3):\penalty0 807--813, 2017.
+
+\bibitem[L{\"o}hne and Wei{\ss}ing(2018)]{bensolve}
+A.~L{\"o}hne and B.~Wei{\ss}ing.
+\newblock Bensolve: A free vlp solver, version 2.1.
+\newblock 2018.
+\newblock URL \url{http://www.bensolve.org/}.
+
+\bibitem[Ralphs et~al.(2006)Ralphs, Saltzman, and Wiecek]{ralphs2006improved}
+T.~K. Ralphs, M.~J. Saltzman, and M.~M. Wiecek.
+\newblock An improved algorithm for solving biobjective integer programs.
+\newblock \emph{Annals of Operations Research}, 147\penalty0 (1):\penalty0
+  43--70, 2006.
+
+\bibitem[Rudloff et~al.(2017)Rudloff, Ulus, and
+  Vanderbei]{rudloff2017parametric}
+B.~Rudloff, F.~Ulus, and R.~Vanderbei.
+\newblock A parametric simplex algorithm for linear vector optimization
+  problems.
+\newblock \emph{Mathematical Programming}, 163\penalty0 (1-2):\penalty0
+  213--242, 2017.
+
+\bibitem[Soylu and Y{\i}ld{\i}z(2016)]{soylu2016exact}
+B.~Soylu and G.~B. Y{\i}ld{\i}z.
+\newblock An exact algorithm for biobjective mixed integer linear programming
+  problems.
+\newblock \emph{Computers \& Operations Research}, 72:\penalty0 204--213, 2016.
+
+\bibitem[Steuer and Choo(1983)]{steuer1983}
+R.~E. Steuer and E.-U. Choo.
+\newblock An interactive weighted tchebycheff procedure for multiple objective
+  programming.
+\newblock \emph{Mathematical programming}, 26\penalty0 (3):\penalty0 326--344,
+  1983.
+
+\bibitem[Zeleny(1974)]{zeleny1974linear}
+M.~Zeleny.
+\newblock Linear multiobjective programming.
+\newblock \emph{Lecture notes in economics and mathematical systems}, 95, 1974.
+
+\bibitem[Zionts and Wallenius(1980)]{zionts1980identifying}
+S.~Zionts and J.~Wallenius.
+\newblock Identifying efficient vectors: some theory and computational results.
+\newblock \emph{Operations Research}, 28\penalty0 (3-part-ii):\penalty0
+  785--793, 1980.
+
+\end{thebibliography}
