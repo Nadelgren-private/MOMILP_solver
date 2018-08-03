@@ -899,10 +899,10 @@ void MultiobjectiveProblem::MeatOfDichotomicSearch(SimplexStore & simplexStore)
               	}
             #else
 
-	        cout << "Got here " << endl;
+/*	        cout << "Got here " << endl;*/
                 if(interiorPoint) status = glp_interior(tempProb, NULL);
                 else status = glp_simplex(tempProb, NULL);
-	        cout << "Got here " << endl;
+/*	        cout << "Got here " << endl;*/
                 if ( status ) {
                 		printf ("%s(%d): GLPK failed to solve tempProb,  error code %d\n", __FILE__, __LINE__, status);
                 		exit(1);
