@@ -28,7 +28,7 @@ class SimplexStore{
        int PointCount(void) const;
 
        Simplex* AddSimplex(vector<int> Points, bool normalize);
-       int SimplexCount(void) const;
+       //int SimplexCount(void) const;
        vector<Simplex *> SplitSimplex(vector<Simplex *> s, int point, bool normalize);
 
        void RemoveSimplex(Simplex * s);
@@ -43,7 +43,7 @@ class SimplexStore{
        bool HasSplitAdj(Simplex * simplex);
 
        std::vector<Point> points;
-       std::list<Simplex *> simplicies;
+       //std::list<Simplex *> simplicies;
 };
 
 #endif

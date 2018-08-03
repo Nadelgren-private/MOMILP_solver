@@ -12,13 +12,6 @@ SimplexStore::SimplexStore(){
 }
 
 SimplexStore::~SimplexStore(){
-    Simplex * s;
-    while (simplicies.size() > 0) {
-       s = simplicies.back();
-       simplicies.pop_back();
-       delete s;
-    }
-    return;
 }
 
 int SimplexStore::AddPoint(Point p){
@@ -69,14 +62,13 @@ Simplex* SimplexStore::AddSimplex(vector<int> simplexPoints, bool normalize){
     s->AddExtreme(simplexPoints[i], false);
     s->Adjacent(i, nullptr);
 
-    simplicies.push_back(s);
-
     return s;
 }
-
+/*
 int SimplexStore::SimplexCount(void) const{
     return simplicies.size();
 }
+*/
 
 // for each point in the simplex
 //      create a new simplex by replacing that point with the new point
@@ -121,7 +113,6 @@ void SimplexStore::MakeNewSimplicies(Simplex * simplex,
 	  }
        }
        newList.push_back(s);
-
     }
 
     return;
@@ -239,19 +230,13 @@ void SimplexStore::RemoveSimplex(Simplex * s) {
     list<Simplex *>::iterator i;
     Simplex * a;
 
-    i = find(simplicies.begin(),simplicies.end(), s);
-    if (i != simplicies.end()) {
-       simplicies.erase(i);
-
-       // deleting any entries in an adjacent simplex list
-       for(int j=0;j<s->GetDimension();j++) {
-          a = s->Adjacent(j);
-	  if (a != nullptr) {
-	     a->RemoveAdjacent(s);
-	  }
+    // deleting any entries in an adjacent simplex list
+    for(int j=0;j<s->GetDimension();j++) {
+       a = s->Adjacent(j);
+       if (a != nullptr) {
+           a->RemoveAdjacent(s);
        }
-       delete s; 
-    }
-
+       }
+    delete s; 
     return;
 }

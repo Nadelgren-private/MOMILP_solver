@@ -791,7 +791,7 @@ void MultiobjectiveProblem::DoInitialSplits(SimplexStore & simplexStore, vector<
         size_t l = simplexStack.size();
 
         // should not need this any longer.
-        if(simplicesToSplit.size() > 1) deleteRepeats(simplexStack, l);
+        //if(simplicesToSplit.size() > 1) deleteRepeats(simplexStack, l);
        
         simplicesToSplit.resize(0);
         
@@ -899,10 +899,8 @@ void MultiobjectiveProblem::MeatOfDichotomicSearch(SimplexStore & simplexStore)
               	}
             #else
 
-/*	        cout << "Got here " << endl;*/
                 if(interiorPoint) status = glp_interior(tempProb, NULL);
                 else status = glp_simplex(tempProb, NULL);
-/*	        cout << "Got here " << endl;*/
                 if ( status ) {
                 		printf ("%s(%d): GLPK failed to solve tempProb,  error code %d\n", __FILE__, __LINE__, status);
                 		exit(1);
@@ -961,7 +959,7 @@ void MultiobjectiveProblem::MeatOfDichotomicSearch(SimplexStore & simplexStore)
                 
                 if(DEBUG) cout << "Size of simplexStack after adding: " << simplexStack.size() << endl;
                 
-                if(simplicesToSplit.size() > 1) deleteRepeats(simplexStack, l);
+                //if(simplicesToSplit.size() > 1) deleteRepeats(simplexStack, l);
                 
                 if(DEBUG) cout << "Size of simplexStack after deleting: " << simplexStack.size() << endl;
                 
@@ -1008,12 +1006,14 @@ void MultiobjectiveProblem::MeatOfDichotomicSearch(SimplexStore & simplexStore)
     
 /*    if(DEBUG) */
 /*    {*/
-        cout << "**************************\nSimplices after dichotomic search (which took " << iterator << " iterations): " << endl;
-        for(unsigned int i = 0; i < simplexStack.size(); i++) simplexStack[i]->WriteOctaveCodeToPlotSimplex(true);
-        cout << "**************************\nTotal number in list is: " << simplexStack.size() << endl;
+       // need to add a flag to make this active, just deactivating for now.
+       
+       // cout << "**************************\nSimplices after dichotomic search (which took " << iterator << " iterations): " << endl;
+       // for(unsigned int i = 0; i < simplexStack.size(); i++) simplexStack[i]->WriteOctaveCodeToPlotSimplex(true);
+       // cout << "**************************\nTotal number in list is: " << simplexStack.size() << endl;
         
-        cout << "*************************************\nThe individual extreme points discovered are:\n";
-        WritePoints(simplexStack); 
+       // cout << "*************************************\nThe individual extreme points discovered are:\n";
+       // WritePoints(simplexStack); 
 /*    }*/
     
 /*    PostProcessDichotomicSearch(retVec);*/
