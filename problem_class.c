@@ -1114,7 +1114,7 @@ void MultiobjectiveProblem::ChangeTempObjCoefs(const vector<double> & v)
 		    printf ("Failed to change obj coef. Error code %d\n", status);
 	    }
 	#else
-	    for(int i = 0; i < objectiveColIndices[0] + 1; i++) glp_set_obj_coef(tempProb, indices[i] + 1, weightedCoefs[i]);
+	    for(int i = 0; i < objectiveColIndices[0] ; i++) glp_set_obj_coef(tempProb, indices[i] + 1, weightedCoefs[i]);
 	#endif
 	
 /*	status = CPXwriteprob (env, tempProb, "prob_after.lp", "LP");*/

@@ -350,7 +350,7 @@ void Simplex::WriteOctaveCodeToPlotSimplex(bool a) const
     {
         for(int j = 0; j < dimension; j++)
         {
-		cout << pointVector->at(j).Data()[i] << " ";
+		cout << pointVector->at(points[j]).Data()[i] << " ";
         }
         cout << "], [";
     }
