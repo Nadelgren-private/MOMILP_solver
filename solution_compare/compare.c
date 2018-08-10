@@ -19,7 +19,7 @@
 
 using namespace std;
 
-const double EPSILON = 0.000001;
+const double EPSILON = 0.0000001;
 bool TERSE = false;
 
 ostream & operator << (ostream & s, const vector<double> & pts) {
@@ -87,7 +87,8 @@ Point ReadPointIB(string line, char validC) {
     if (type == validC) {
        data >> num;
        while (data) {
-           p.point.push_back(num);
+           if(abs(num > .0000000000000001)) p.point.push_back(num);
+	   else p.point.push_back(0.);
            data >> num;
        }
     }
@@ -116,7 +117,8 @@ Point ReadPointN(string line, char * fileName) {
     first.str(line.substr(pos1+1,pos2-pos1-1));
     first >> val;
     while (first ) {
-        p.point.push_back(val);
+        if(abs(val > .0000000000000001)) p.point.push_back(val);
+	else p.point.push_back(0.);
 	first >> val;
     }
 
@@ -354,6 +356,7 @@ double FindDistance(vector<Point> a, vector<Point> b) {
     int ind = 0;
     int num = 0;
     double va = 0., min = CPX_INFBOUND, max = -CPX_INFBOUND;
+    int maxInd = 0;
 /*    char l = 'L';*/
 /*    double d[1] = {0.};*/
     vector<int> cmatbeg;
@@ -499,7 +502,10 @@ double FindDistance(vector<Point> a, vector<Point> b) {
         if(!status)
         {
             if(va < min) min = va;
-            if(va > max) max = va;
+            if(va > max) {
+	        max = va;
+	        maxInd = i;
+            }
 /*            cout << va << endl;*/
 /*            cout << "min: " << min << "\tmax: " << max << endl;*/
         }
@@ -519,6 +525,13 @@ double FindDistance(vector<Point> a, vector<Point> b) {
         }
 */
     }
+    cout << "Point causing max distance: " << endl;
+    for(unsigned int j = 0; j < dim; j++)
+    {
+       cout << diff[maxInd].point[j] << " ";
+    }
+    cout << endl;
+
     return max;
 }
 
@@ -571,8 +584,9 @@ int main(int argc, char **argv)
     ReadPoints(argv[2], set2);
 
     sort(set1.begin(), set1.end());
+    set1.resize(distance(set1.begin(), unique(set1.begin(), set1.end())));
     sort(set2.begin(), set2.end());
-
+    set2.resize(distance(set2.begin(), unique(set2.begin(), set2.end())));
 
     same = Compare(set1, set2, argv[1], argv[2],showDiff);
     if ( compOtherPoints) {

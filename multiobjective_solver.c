@@ -24,6 +24,8 @@ bool SCAN_FOR_REPEATS = false;
 bool SAVE_POINTS = true;
 bool SCAN_FOR_NEGATIVE_NORMAL = false;
 double EPSILON = .000000001;
+bool DIM_REDUCE = true;
+bool SCALE_OBJECTIVES = false;
 
 int main(int argc, char **argv)
 {
@@ -39,8 +41,10 @@ int main(int argc, char **argv)
 	#ifdef CPLEX
 	    CPXENVptr  env = NULL;
         CPXLPptr   lp = NULL;
+        CPXLPptr   lp2 = NULL;
     #else 
         glp_prob *lp;
+        glp_prob *lp2;
     #endif
     ifstream fin;
     ofstream fout;
@@ -69,6 +73,13 @@ int main(int argc, char **argv)
 		    printf ("Failure to set threads to 1, error %d.\n",status);
 		    exit(0);
 	    }
+	    
+/*	    status = CPXsetintparam (env, CPX_PARAM_REDUCE, CPX_PREREDUCE_PRIMALONLY);*/
+/*	    status = CPXsetintparam (env, CPX_PARAM_SCRIND, CPX_ON);*/
+/*	    if ( status ) {*/
+/*		    printf ("Failure to set threads to 1, error %d.\n",status);*/
+/*		    exit(0);*/
+/*	    }*/
 	#endif
   	
   	/******************************************************************/
@@ -110,7 +121,7 @@ int main(int argc, char **argv)
     filename1 = argv[2];
     filename2 = "temp0.mop";
     
-    if(phrase[1] == 'm') // assume we are working with a single *.mops file
+    if(phrase[1] == 'm') // assume we are working with a single *.mop file
     {
         #ifndef CPLEX
 /*        cout << "modifying file to not contain OBJSENSE" << endl;*/
@@ -214,6 +225,249 @@ int main(int argc, char **argv)
                 filename2[4]++;
             }
         #endif
+    }
+    else if(phrase[1] == 'v') //assume we are working with a *.vlp file
+    {
+        vector< vector<double> > objCoefs;
+        vector< vector<double> > conCoefs;
+        vector<char> rowTypes;
+        vector<double> rowLB;
+        vector<double> rowUB;
+        vector<char> colTypes;
+        vector<double> colLB;
+        vector<double> colUB;
+        vector<int> indices;
+        int rows = 0;
+        int cols = 0;
+        int objs = 0;
+        int intVal = 0;
+        int intVal2 = 0;
+        int intZ = 0;
+        double negInf = -100000000000000000000.;
+        double posInf = 100000000000000000000.;
+        
+        cout << "VLP file type detected." << endl;
+        
+        fin.open(filename1);
+        while(getline(fin, phrase)) //read the problem data from the *.vlp file
+        {
+            phrase2 = regex_replace(phrase, regex("^ +"), "");
+            phrase2 = regex_replace(phrase2, regex("^\t+"), "");
+/*            cout << phrase2 << endl;*/
+            if(phrase2[0] == 'p' || phrase2[0] == 'P')
+            {
+                phrase2 = phrase2.substr(phrase2.find(" "));
+                phrase2 = regex_replace(phrase2, regex("^ +"), "");
+                phrase2 = regex_replace(phrase2, regex("^\t+"), "");
+/*                cout << phrase2 << endl;*/
+                phrase2 = phrase2.substr(phrase2.find(" "));
+                phrase2 = regex_replace(phrase2, regex("^ +"), "");
+                phrase2 = regex_replace(phrase2, regex("^\t+"), "");
+/*                cout << phrase2 << endl;*/
+                if((phrase2[0] == 'M' || phrase2[0] == 'm') && (phrase2[1] == 'A' || phrase2[1] == 'a') && (phrase2[2] == 'X' || phrase2[2] == 'x')) minProb = false;
+                phrase2 = phrase2.substr(phrase2.find(" "));
+                phrase2 = regex_replace(phrase2, regex("^ +"), "");
+                phrase2 = regex_replace(phrase2, regex("^\t+"), "");
+/*                cout << phrase2 << endl;*/
+                stringstream ss(phrase2);
+                ss >> rows >> cols >> intVal >> objs;
+                cout << "Number of rows: " << rows << endl;
+                cout << "Number of cols: " << cols << endl;
+                cout << "Number of objs: " << objs << endl;
+                conCoefs.resize(rows);
+                objCoefs.resize(objs);
+                for(int i = 0; i < rows; i++)
+                {
+                    #ifdef CPLEX
+                        conCoefs[i].resize(cols,0.);
+                    #else
+                        conCoefs[i].resize(cols+1,0.);
+                    #endif
+                }
+                for(int i = 0; i < objs; i++)
+                {
+                    #ifdef CPLEX
+                        objCoefs[i].resize(cols,0.);
+                    #else
+                        objCoefs[i].resize(cols+1,0.);
+                    #endif
+                }
+                rowLB.resize(rows + 1,negInf);
+                rowUB.resize(rows + 1,posInf);
+                rowTypes.resize(rows + 1);
+                colLB.resize(cols + 1,negInf);
+                colUB.resize(cols + 1,posInf);
+                colTypes.resize(cols + 1);
+            }
+            else if(phrase2[0] == 'i' || phrase2[0] == 'I')
+            {
+                phrase2 = phrase2.substr(phrase2.find(" "));
+                stringstream ss(phrase2);
+                ss >> intVal;
+                ss >> rowTypes[intVal];
+/*                cout << "Setting row " << intVal << " to " << rowTypes[intVal] << " type." << endl;*/
+                if(rowTypes[intVal] == 'l') ss >> rowLB[intVal];
+                else if(rowTypes[intVal] == 'u') ss >> rowUB[intVal];
+                else if(rowTypes[intVal] == 'd') ss >> rowLB[intVal] >> rowUB[intVal];
+                else if(rowTypes[intVal] == 's')
+                {
+                    ss >> rowLB[intVal];
+                    rowUB[intVal] = rowLB[intVal];
+                }
+            }
+            else if(phrase2[0] == 'j' || phrase2[0] == 'J')
+            {
+                phrase2 = phrase2.substr(phrase2.find(" "));
+                stringstream ss(phrase2);
+                ss >> intVal;
+                ss >> colTypes[intVal];
+/*                cout << "Setting col " << intVal << " to " << colTypes[intVal] << " type." << endl;*/
+                if(colTypes[intVal] == 'l') ss >> colLB[intVal];
+                else if(colTypes[intVal] == 'u') ss >> colUB[intVal];
+                else if(colTypes[intVal] == 'd') ss >> colLB[intVal] >> colUB[intVal];
+                else if(colTypes[intVal] == 's')
+                {
+                    ss >> colLB[intVal];
+                    colUB[intVal] = colLB[intVal];
+                }
+            }
+            else if(phrase2[0] == 'a' || phrase2[0] == 'A')
+            {
+                phrase2 = phrase2.substr(phrase2.find(" "));
+                stringstream ss(phrase2);
+                ss >> intVal >> intVal2;
+                #ifdef CPLEX
+                    ss >> conCoefs[intVal - 1][intVal2 - 1];
+                #else
+                    ss >> conCoefs[intVal - 1][intVal2];
+                #endif
+            }
+            else if(phrase2[0] == 'o' || phrase2[0] == 'O')
+            {
+                phrase2 = phrase2.substr(phrase2.find(" "));
+                stringstream ss(phrase2);
+                ss >> intVal >> intVal2;
+                #ifdef CPLEX
+                    ss >> objCoefs[intVal - 1][intVal2 - 1];
+                #else
+                    ss >> objCoefs[intVal - 1][intVal2];
+                #endif
+            }
+            else if(phrase2[0] == 'k' || phrase2[0] == 'K')
+            {
+                cout << "VLP file type detected." << endl;
+                cout << "Error: Cone generator coefficients and/or duality parameters found. We only solve standard multiobjective problems. Exiting!\n";
+                exit(1);
+            }
+        }
+        fin.close();
+        
+        //write the problem data into either a CPLEX or glpk problem object.
+        for(int i = 0; i <= max(rows,cols); i++) indices.push_back(i);
+        
+        cout << "The constraints:" << endl;
+        for(unsigned int i = 0; i < conCoefs.size(); i++)
+        {
+            for(unsigned int j = 0; j < conCoefs[0].size(); j++) cout << conCoefs[i][j] << " ";
+            cout << endl;
+        } 
+        
+        cout << "The objectives:" << endl;
+        for(unsigned int i = 0; i < objCoefs.size(); i++)
+        {
+            for(unsigned int j = 0; j < objCoefs[0].size(); j++) cout << objCoefs[i][j] << " ";
+            cout << endl;
+        }        
+        
+        #ifdef CPLEX
+            char G = 'G';
+            char L = 'L';
+            char U = 'U';
+            char B = 'B';
+            char E = 'E';
+            double ni = -CPX_INFBOUND;
+            lp = CPXcreateprob (env,&status,argv[2]);
+          	if(lp==NULL) 
+          	{
+            		printf("CPXcreateprob, Failed to create LP%d, error code %d\n", 0, status);
+            		exit(0);
+            }
+            
+/*            cout << rowTypes[1] << endl;*/
+            if(rowTypes[1] == 'l') status = CPXaddrows (env, lp, cols, 1, cols, &rowLB[1], &G, &intZ, indices.data(), conCoefs[0].data(), NULL, NULL);
+            else if(rowTypes[1] == 'u') status = CPXaddrows (env, lp, cols, 1, cols, &rowUB[1], &L, &intZ, indices.data(), conCoefs[0].data(), NULL, NULL);
+            else if(rowTypes[1] == 's') status = CPXaddrows (env, lp, cols, 1, cols, &rowLB[1], &E, &intZ, indices.data(), conCoefs[0].data(), NULL, NULL);
+            for(int i = 1; i < rows; i++) 
+            {
+                if(rowTypes[i+1] == 'l') status = CPXaddrows (env, lp, 0, 1, cols, &rowLB[i+1], &G, &intZ, indices.data(), conCoefs[i].data(), NULL, NULL);
+                else if(rowTypes[i+1] == 'u') status = CPXaddrows (env, lp, 0, 1, cols, &rowUB[i+1], &L, &intZ, indices.data(), conCoefs[i].data(), NULL, NULL);
+                else if(rowTypes[i+1] == 's') status = CPXaddrows (env, lp, 0, 1, cols, &rowLB[i+1], &E, &intZ, indices.data(), conCoefs[i].data(), NULL, NULL);
+            }
+            
+            for(int i = 0; i < cols; i++)
+            {
+                status = CPXchgbds (env, lp, 1, &i, &L, &ni);
+                if(colTypes[i+1] == 'l') status = CPXchgbds (env, lp, 1, &i, &L, &colLB[i+1]);
+                else if(colTypes[i+1] == 'u') status = CPXchgbds (env, lp, 1, &i, &U, &colUB[i+1]);
+                else if(colTypes[i+1] == 's') status = CPXchgbds (env, lp, 1, &i, &B, &colLB[i+1]);
+                else if(colTypes[i+1] == 'd') 
+                {
+                    status = CPXchgbds (env, lp, 1, &i, &L, &colLB[i+1]);
+                    status = CPXchgbds (env, lp, 1, &i, &U, &colUB[i+1]);
+                }
+            }
+            
+            if(!minProb) status = CPXchgobjsen (env, lp, CPX_MAX);
+            
+/*            status = CPXwriteprob (env, lp, "prob_cplex.lp", "LP");*/
+/*            exit(0);*/
+
+            for(int i = 0; i < objs; i++)
+            {
+                lp2 = CPXcreateprob (env,&status,argv[2]);
+                lp2 = CPXcloneprob (env, lp, &status);
+                status = CPXchgobj(env, lp2, cols, indices.data(), objCoefs[i].data());
+                myProb.AddLP(lp2);
+/*                status = CPXwriteprob (env, lp, "prob_cplex.lp", "LP");*/
+            }
+        #else
+            lp = glp_create_prob();
+            
+            status = glp_add_cols(lp, cols);
+            status = glp_add_rows(lp, rows);
+            
+            for(int i = 1; i <= rows; i++)
+            {
+                if(rowTypes[i] == 'l') glp_set_row_bnds(lp, i, GLP_LO, rowLB[i], rowUB[i]);
+                else if(rowTypes[i] == 'u') glp_set_row_bnds(lp, i, GLP_UP, rowLB[i], rowUB[i]);
+                else if(rowTypes[i] == 's') glp_set_row_bnds(lp, i, GLP_FX, rowLB[i], rowUB[i]);
+            }
+            for(int i = 1; i <= cols; i++)
+            {
+                if(colTypes[i] == 'l') glp_set_col_bnds(lp, i, GLP_LO, colLB[i], colUB[i]);
+                else if(colTypes[i] == 'u') glp_set_col_bnds(lp, i, GLP_UP, colLB[i], colUB[i]);
+                else if(colTypes[i] == 's') glp_set_col_bnds(lp, i, GLP_FX, colLB[i], colUB[i]);
+                else if(colTypes[i] == 'd') glp_set_col_bnds(lp, i, GLP_DB, colLB[i], colUB[i]);
+            }
+            
+/*            indices.erase(indices.begin());*/
+            for(int i = 0; i < rows; i++) glp_set_mat_row(lp, i+1, cols, indices.data(), conCoefs[i].data());
+            
+            if(minProb) glp_set_obj_dir(lp, GLP_MIN);
+	        else glp_set_obj_dir(lp, GLP_MAX);
+            
+            for(int i = 0; i < objs; i++)
+            {
+                lp2 = glp_create_prob();
+                glp_copy_prob(lp2, lp, GLP_ON);
+                for(int j = 1; j <= cols; j++) glp_set_obj_coef(lp2, j, objCoefs[i][j]);
+/*                glp_write_lp(lp2, NULL, "prob_glpk.lp");*/
+/*                exit(0);*/
+                myProb.AddLP(lp2);
+/*                glp_write_lp(lp, NULL, "prob_glpk.lp");*/
+            }
+        #endif
+/*        exit(0);        */
     }
     else // assume we are working with multiple *.lp files
     {
@@ -320,6 +574,7 @@ int main(int argc, char **argv)
         #else
             status = glp_write_lp(myProb.GetMainLP(), NULL, "overall_prob_glpk.lp");
         #endif
+/*        exit(0);*/
     }
   	
         if(DEBUG) cout << "finding initial simplices" << endl;
